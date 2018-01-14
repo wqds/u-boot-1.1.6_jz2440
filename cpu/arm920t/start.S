@@ -195,8 +195,6 @@ reset:
 
 #endif	
 
-
-
 #endif	/* CONFIG_S3C2400 || CONFIG_S3C2410 */
 
 	/*
@@ -225,6 +223,9 @@ copy_loop:
 	cmp	r0, r2			/* until source end addreee [r2]    */
 	ble	copy_loop
 #endif	/* CONFIG_SKIP_RELOCATE_UBOOT */
+
+	
+
 
 	/* Set up the stack						    */
 stack_setup:
@@ -308,6 +309,7 @@ cpu_init_crit:
 	 * because memory timing is board-dependend, you will
 	 * find a lowlevel_init.S in your board directory.
 	 */
+	
 	mov	ip, lr
 	bl	lowlevel_init
 	mov	lr, ip

@@ -13,7 +13,7 @@
 #define CONFIG_STAR2440		1	/* on a SAMSUNG SMDK2410 Board  */
 
 /* input clock of PLL */
-#define CONFIG_SYS_CLK_FREQ	12000000/* the SMDK2440 has 12MHz input clock */
+#define CONFIG_SYS_CLK_FREQ	12000000/* the STAR2440 has 12MHz input clock */
 
 
 #define USE_920T_MMU		1

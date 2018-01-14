@@ -85,7 +85,6 @@ void serial_setbrg (void)
 int serial_init (void)
 {
 	serial_setbrg ();
-
 	return (0);
 }
 

@@ -1,4 +1,5 @@
 /*
+/*
  * (C) Copyright 2001-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
  *
@@ -67,7 +68,16 @@ static ulong get_PLLCLK(int pllreg)
     p = ((r & 0x003F0) >> 4) + 2;
     s = r & 0x3;
 
-    return((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));
+	//if(pllreg == MPLL)
+	//	return((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));
+	//else if(pllreg == UPLL)
+	//	return((CONFIG_SYS_CLK_FREQ * m) / (p << s));
+	//return((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));
+	//很奇怪的是上面的代码注释掉重新用vim写一遍串口就有输出了
+	if(pllreg == MPLL)
+		return ((CONFIG_SYS_CLK_FREQ * m * 2) / (p << s));
+	else if(pllreg == UPLL)
+		return ((CONFIG_SYS_CLK_FREQ * m) / (p << s));
 }
 
 /* return FCLK frequency */
@@ -80,9 +90,39 @@ ulong get_FCLK(void)
 ulong get_HCLK(void)
 {
     S3C24X0_CLOCK_POWER * const clk_power = S3C24X0_GetBase_CLOCK_POWER();
-	
+	unsigned int clk_divn, cam_divn, div;
+	clk_divn = clk_power->CLKDIVN>>1 & 0x03;
+	cam_divn = clk_power->CAMDIVN;
+	switch (clk_divn)
+	{
+		case 0:
+		{
+			div = 1;
+			break;
+		}
+		case 1:
+		{
+			div = 2;
+			break;
+		}
+		case 2:
+		{
+			div = (cam_divn>>9 & 0x01) ? 8 : 4;
+			break;
+		}
+		case 3:
+		{
+			div = (cam_divn>>8 & 0x01) ? 6 : 3;
+			break;
+		}
+		default:
+		{
+			div = 1;
+			break;
+		}
+	}
 
-    return((clk_power->CLKDIVN & 0x2) ? get_FCLK()/4 : get_FCLK());
+    return (get_FCLK() / div);
 }
 
 /* return PCLK frequency */
@@ -96,7 +136,7 @@ ulong get_PCLK(void)
 /* return UCLK frequency */
 ulong get_UCLK(void)
 {
-    return(get_PLLCLK(UPLL));
+	return(get_PLLCLK(UPLL));
 }
 
 #endif /* defined(CONFIG_S3C2400) || defined (CONFIG_S3C2410) || defined (CONFIG_TRAB) */
