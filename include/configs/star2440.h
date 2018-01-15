@@ -159,4 +159,12 @@
 #define	CFG_ENV_IS_IN_FLASH	1
 #define CFG_ENV_SIZE		0x10000	/* Total Size of Environment Sector */
 
+
+/*nand*/
+#define NAND_MAX_CHIPS 1
+#define CFG_MAX_NAND_DEVICE 1
+#define CFG_NAND_BASE 1 
+
+
+
 #endif	/* __CONFIG_H */

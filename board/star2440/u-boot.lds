@@ -33,6 +33,7 @@ SECTIONS
 	.text      :
 	{
 	  cpu/arm920t/start.o	(.text)
+	  board/star2440/relocate_uboot.o (.text)
 	  *(.text)
 	}
 
