@@ -71,6 +71,9 @@ ulong flash_init (void)
 #elif defined(CONFIG_AMD_LV800)
 			(AMD_MANUFACT & FLASH_VENDMASK) |
 			(AMD_ID_LV800B & FLASH_TYPEMASK);
+#elif defined(CONFIG_MX_LV160)
+			(MX_MANUFACT & FLASH_VENDMASK) |
+			(MX_ID_LV160D & FLASH_TYPEMASK);
 #else
 #error "Unknown flash configured"
 #endif
@@ -91,10 +94,8 @@ ulong flash_init (void)
 
 				/* 2nd and 3rd are both 8 KB */
 				if ((j == 1) || (j == 2)) {
-					flash_info[i].start[j] =
-						flashbase + 0x4000 + (j -
-								      1) *
-						0x2000;
+					flash_info[i].start[j] = 
+						flashbase + 0x4000 + (j -1) * 0x2000;
 				}
 
 				/* 4th 32 KB */

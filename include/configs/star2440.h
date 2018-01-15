@@ -53,7 +53,7 @@
 #define CONFIG_COMMANDS \
 			(CONFIG_CMD_DFL	 | \
 			CFG_CMD_CACHE	 | \
-			/*CFG_CMD_NAND	 |*/ \
+			CFG_CMD_NAND	 | \
 			/*CFG_CMD_EEPROM |*/ \
 			/*CFG_CMD_I2C	 |*/ \
 			/*CFG_CMD_USB	 |*/ \
@@ -65,7 +65,7 @@
 #include <cmd_confdefs.h>
 
 #define CONFIG_BOOTDELAY	5
-/*#define CONFIG_BOOTARGS    	"root=ramfs devfs=mount console=ttySA0,9600" */
+#define CONFIG_BOOTARGS    	"root=ramfs devfs=mount console=ttySA0,115200"
 /*#define CONFIG_ETHADDR	08:00:3e:26:0a:5b */
 #define CONFIG_NETMASK          255.255.255.0
 #define CONFIG_IPADDR		192.168.3.11
@@ -130,10 +130,10 @@
  */
 #if 0
 #define CONFIG_AMD_LV400	1	/* uncomment this if you have a LV400 flash */
+#define CONFIG_AMD_LV800	1	/* uncomment this if you have a LV800 flash */
 #endif
 
-#define CONFIG_AMD_LV800	1	/* uncomment this if you have a LV800 flash */
-
+#define CONFIG_MX_LV160 1    /* uncomment this if you have a LV160 flash */
 
 #define CFG_MAX_FLASH_BANKS	1	/* max number of memory banks */
 #ifdef CONFIG_AMD_LV800
@@ -145,6 +145,11 @@
 #define PHYS_FLASH_SIZE		0x00080000 /* 512KB */
 #define CFG_MAX_FLASH_SECT	(11)	/* max number of sectors on one chip */
 #define CFG_ENV_ADDR		(CFG_FLASH_BASE + 0x070000) /* addr of environment */
+#endif
+#ifdef CONFIG_MX_LV160
+#define PHYS_FLASH_SIZE		0x00200000 /* 2MB */
+#define CFG_MAX_FLASH_SECT	(35)	/* max number of sectors on one chip */
+#define CFG_ENV_ADDR		(CFG_FLASH_BASE + 0x0F0000) /* addr of environment */
 #endif
 
 /* timeout values are in ticks */
