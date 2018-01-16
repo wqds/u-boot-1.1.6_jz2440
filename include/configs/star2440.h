@@ -10,7 +10,7 @@
 #define CONFIG_SMDK2410		1	/* on a SAMSUNG SMDK2410 Board  此处不要删除，否则会提示很多错误*/
 
 #define	CONFIG_S3C2410		1	/* in a SAMSUNG S3C2410 SoC    此处不要改成CONFIG_S3C2440，否则会提示很多错误 */
-#define CONFIG_STAR2440		1	/* on a SAMSUNG SMDK2410 Board  */
+#define CONFIG_STAR2440		1	
 
 /* input clock of PLL */
 #define CONFIG_SYS_CLK_FREQ	12000000/* the STAR2440 has 12MHz input clock */
@@ -157,6 +157,8 @@
 #define CFG_FLASH_WRITE_TOUT	(5*CFG_HZ) /* Timeout for Flash Write */
 
 #define	CFG_ENV_IS_IN_FLASH	1
+//#define     CFG_ENV_IS_IN_NAND 1
+
 #define CFG_ENV_SIZE		0x10000	/* Total Size of Environment Sector */
 
 
